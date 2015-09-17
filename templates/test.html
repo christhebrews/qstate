@@ -1,0 +1,62 @@
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+
+<script>
+    $(document).ready(function(){
+        $('form').submit(function(e){
+            e.preventDefault();
+            
+            var resultContainer = $(this).attr('id') + "-result";
+            $.ajax({
+                data: $(this).serialize(),
+                dataType: 'json',
+                method: $(this).attr('method'),
+                url: $(this).attr('action'),
+                success: function(data, status, resp){
+                    $('#' + resultContainer).html(resp.responseText);
+                }
+            });
+        });
+    });
+</script>
+
+<h1>Test API</h1>
+
+<div>
+    <h2>Push</h2>
+    <form id="push" method="post" action="/push">
+        <input type="text" name="state" />
+        <input type="submit" />
+    </form>
+    <div id="push-result"></div>
+</div>
+
+<div>
+    <h2>Next</h2>
+    <form id="next" method="post" action="/next">
+        <input type="submit" />
+    </form>
+    <div id="next-result"></div>
+</div>
+
+<div>
+    <h2>State</h2>
+    <form id="state" method="get" action="/state">
+        <input type="submit" />
+    </form>
+    <div id="state-result"></div>
+</div>
+
+<div>
+    <h2>Debug</h2>
+    <form id="debug" method="get" action="/debug">
+        <input type="submit" />
+    </form>
+    <div id="debug-result"></div>
+</div>
+
+</body>
+</html>

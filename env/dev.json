@@ -1,0 +1,17 @@
+{
+    "redis": {
+        "host": "localhost",
+        "port": 6379,
+        "db": 1
+    },
+    "adapters": [
+        {
+            "code": "test1",
+            "url": "http://127.0.0.1:5000/testSetState"
+        }
+    ],
+    "gearman": {
+        "job_server": "localhost:4730",
+        "job_prefix": "statequeue_"
+    }
+}
