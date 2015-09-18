@@ -1,7 +1,7 @@
-web:
+api:
     build: .
-    command: python web.py
-    container_name: queue_web
+    command: python api.py
+    container_name: queue_api
     volumes:
      - ./:/app/src
     ports:
@@ -12,10 +12,10 @@ web:
     environment:
      - APP_MODE=dev
 
-daemon:
+pub:
     build: .
-    command: python daemon.py
-    container_name: queue_daemon
+    command: python pub.py
+    container_name: queue_pub
     volumes:
      - ./:/app/src
     links:
