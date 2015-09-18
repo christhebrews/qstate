@@ -9,11 +9,12 @@
 
 The `qstate` component is designed to manage global state for a distributed API architecture.  Its design is extremely simple:
 
-1. It maintains a queue of states, denoted simply by simple strings.
+1. It maintains a queue of states, denoted only by strings.
 2. When the queue is incremented/moves to the next state, the state queue fires a message to all attached components via an API adapter.
 
 Limitations:
-1. The `qstate` queue is one-directional, and once a state is moved past it cannot be revisited.
+
+1. The `qstate` queue is one-directional, and once a state is moved past it cannot be revisited (right now it's completely discarded).
 2. `qstate` does not store anything functional about states: it simple stores their string identifiers.
 
 The two components of `qstate`, the API interface and the state publisher are connected through a gearman container.
@@ -41,7 +42,7 @@ MY_ACTIVE_MACHINE
 $ docker-machine ip MY_ACTIVE_MACHINE
 </pre>
 
-5. Point your browser to the IP address on port 80 to get to the qstate debug screen.
+5. Point your browser to the IP address on port 80 to get to the `qstate` debug screen.
  
 ## API
 
@@ -154,3 +155,14 @@ Gearman config.
 
 * `job_server` (string): this should be the gearman job server and port in the format hostname:port.  Note that the hostname is "gearman" because this is the name of the linked container in docker-compose.  The port is exposed as well.
 * `job_prefix` (string): a prefix for `qstate` gearman jobs, in case you're using the same gearman server for multiple services (why not, right?)
+
+## TODO
+
+The core architecture is complete, but I'm considering the following enhancements:
+
+* Investigate implementation of full-fledged REST & OAuth
+* Improve documentation
+* Create different access levels to limit/control functionality
+* Build sample adapters
+* Better logging, timestamps, and historical data around state change
+* Abstract persistence layer (low)
