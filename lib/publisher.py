@@ -23,7 +23,7 @@ class Publisher:
         post = {"state": state}
         headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
         for api in config["adapters"]:
-            print "Running api request: " + api["code"]
+            print "Running api request: " + api["name"]
             r = requests.post(api["url"], data=json.dumps(post), headers=headers)
             if r.status_code > 200:
                 print "Error recieved running request against " + api["url"]

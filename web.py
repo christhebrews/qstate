@@ -31,6 +31,11 @@ def debug():
         active_state = publisher.getActive()
     )
 
+# TEST
+@app.route("/")
+def test():
+    return render_template('test.html')
+
 def getPostData(request):
     if request.get_json() is not None:
         return request.get_json()
@@ -38,23 +43,7 @@ def getPostData(request):
         return request.form
     else:
         return {}
-            
-    
-# TEMPORARY
-from lib.persistent import *
-    
-@app.route("/testSetState", methods=["POST"])
-def testApi():
-    print "hit test api"
-    state = getPostData(request)["state"]
-    s = Persistent('test').set(state)
-    s.save()
-    return "complete"
-    
-@app.route("/test")
-def test():
-    return render_template('test.html')
-    
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
 

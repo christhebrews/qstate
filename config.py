@@ -1,13 +1,11 @@
-ENVIRONMENT = "dev"
-
-###########################
-
 import json
-import os.path
+import os
 
 config = {}
 
-filename = 'env/' + ENVIRONMENT + '.json'
+env = os.getenv('APP_MODE', "dev")
+
+filename = 'env/' + env + '.json'
 
 if not os.path.isfile(filename):
     raise FileNotFoundError("No config file " + filename + " exists")
