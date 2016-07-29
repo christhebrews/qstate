@@ -25,7 +25,7 @@ Installation assumes that you already have Docker and its prerequisites installe
 
 1. Clone the repository:
 <pre>
-$ git clone https://github.com/christhebrews/qstate
+$ git clone https://github.com/cbrews/qstate
 $ cd qstate/
 </pre>
 
